@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Kompetensi Photoshop DKV - 20 Soal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
+
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            
+            /* Kategori Colors */
+            --c-retouch: #f43f5e; /* Rose */
+            --c-select: #3b82f6;  /* Blue */
+            --c-design: #8b5cf6;  /* Violet */
+            --c-print: #eab308;   /* Yellow */
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at top, #334155 0%, var(--bg-dark) 70%);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Legend / Filter */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px 40px;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+        /* Grid Layout */
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        /* Flip Card CSS */
+        .card-container {
+            background-color: transparent;
+            height: 240px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .card-container:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 24px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Front Styling */
+        .card-front {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .q-number {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            opacity: 0.1;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .topic {
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 2;
+            margin-bottom: 5px;
+        }
+
+        .sub-topic {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Back Styling */
+        .card-back {
+            background-color: #fff;
+            color: #1e293b;
+            transform: rotateY(180deg);
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .card-back h4 {
+            margin: 0 0 10px 0;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
+            width: 100%;
+            padding-bottom: 5px;
+        }
+
+        .indicator-text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        .level-badge {
+            background: #0f172a;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        /* Color Coding */
+        .retouch .card-front { border-bottom: 4px solid var(--c-retouch); }
+        .retouch .q-number { color: var(--c-retouch); }
+        
+        .select .card-front { border-bottom: 4px solid var(--c-select); }
+        .select .q-number { color: var(--c-select); }
+
+        .design .card-front { border-bottom: 4px solid var(--c-design); }
+        .design .q-number { color: var(--c-design); }
+
+        .print .card-front { border-bottom: 4px solid var(--c-print); }
+        .print .q-number { color: var(--c-print); }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>PETA KOMPETENSI DKV</h1>
+        <div class="subtitle">Analisis & Distribusi 20 Soal Adobe Photoshop</div>
+    </header>
+
+    <div class="legend">
+        <div class="badge"><span class="dot" style="background: var(--c-retouch);"></span> Retouching (6 Soal)</div>
+        <div class="badge"><span class="dot" style="background: var(--c-select);"></span> Seleksi & BG (5 Soal)</div>
+        <div class="badge"><span class="dot" style="background: var(--c-design);"></span> Desain Poster (7 Soal)</div>
+        <div class="badge"><span class="dot" style="background: var(--c-print);"></span> Output (2 Soal)</div>
+    </div>
+
+    <div class="grid-wrapper">
+
+        <!-- RETOUCHING SECTION -->
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">01</div>
+                    <div class="topic">Spot Healing</div>
+                    <div class="sub-topic">Retouching Noda</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menganalisis efisiensi Spot Healing Brush vs Clone Stamp untuk noda kecil otomatis.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">02</div>
+                    <div class="topic">Layer Mask</div>
+                    <div class="sub-topic">Non-Destruktif</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Mendiagnosis keunggulan Layer Mask dibanding Eraser Tool yang merusak piksel.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">03</div>
+                    <div class="topic">Patch Tool</div>
+                    <div class="sub-topic">Area Besar</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menentukan Patch Tool sebagai solusi terbaik untuk menambal area background luas.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">04</div>
+                    <div class="topic">Dodge & Burn</div>
+                    <div class="sub-topic">Dimensi Wajah</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menyimpulkan fungsi Dodge & Burn untuk sculpting/kontras wajah, bukan penghapus noda.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">05</div>
+                    <div class="topic">Eraser Tool</div>
+                    <div class="sub-topic">Miskonsepsi</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Membedakan prinsip Eraser (menghapus) dengan Healing (mengganti tekstur) pada foto lama.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container retouch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">06</div>
+                    <div class="topic">Clone vs Heal</div>
+                    <div class="sub-topic">Perbandingan Tool</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Membandingkan Clone Stamp (copy murni) vs Healing Brush (copy + blend warna).</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELECTION SECTION -->
+        <div class="card-container select">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">07</div>
+                    <div class="topic">Magic Wand</div>
+                    <div class="sub-topic">Seleksi Solid</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Memilih alat seleksi otomatis yang efisien untuk latar belakang warna polos.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container select">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">08</div>
+                    <div class="topic">Solid Color</div>
+                    <div class="sub-topic">Ganti BG</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Merancang alur kerja ganti background non-destruktif dengan Adjustment Layer.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container select">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">09</div>
+                    <div class="topic">Refine Edge</div>
+                    <div class="sub-topic">Seleksi Rambut</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menentukan fitur Refine Edge Brush untuk deteksi tepi rambut yang rumit.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container select">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">10</div>
+                    <div class="topic">Curves</div>
+                    <div class="sub-topic">White Balance</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menganalisis penggunaan Grey Point pada Curves untuk koreksi warna presisi.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container select">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">11</div>
+                    <div class="topic">Decontaminate</div>
+                    <div class="sub-topic">Halos / Fringing</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menerapkan fitur Decontaminate Colors untuk membersihkan sisa warna di pinggir seleksi.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESIGN SECTION -->
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">12</div>
+                    <div class="topic">High Pass</div>
+                    <div class="sub-topic">Ketajaman Tekstur</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Memilih teknik High Pass + Overlay untuk menajamkan detail makanan non-destruktif.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">13</div>
+                    <div class="topic">Smart Object</div>
+                    <div class="sub-topic">Skalabilitas</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menentukan Smart Object agar teks/logo tidak pecah saat diubah ukurannya berulang kali.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">14</div>
+                    <div class="topic">Blending Modes</div>
+                    <div class="sub-topic">Interaksi Layer</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menerapkan Blending Modes untuk menyatukan elemen grafis dengan tekstur latar.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">16</div>
+                    <div class="topic">Layer Styles</div>
+                    <div class="sub-topic">Efek Visual (fx)</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menunjukkan lokasi penerapan Drop Shadow & Glow yang benar pada panel Layer Style.</div>
+                    <div class="level-badge">L1 - Pemahaman</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">17</div>
+                    <div class="topic">Clipping Mask</div>
+                    <div class="sub-topic">Bingkai Foto</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menerapkan Clipping Mask untuk memasukkan foto ke dalam bentuk lingkaran/bingkai.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">18</div>
+                    <div class="topic">Overlay</div>
+                    <div class="sub-topic">Kontras Dramatis</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menganalisis Blending Mode Overlay/Soft Light untuk meningkatkan kontras poster.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container design">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">19</div>
+                    <div class="topic">Free Transform</div>
+                    <div class="sub-topic">Perspektif</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Mengoperasikan mode Distort/Perspective untuk menyesuaikan teks dengan ruang.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTPUT SECTION -->
+        <div class="card-container print">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">15</div>
+                    <div class="topic">CMYK Color</div>
+                    <div class="sub-topic">Cetak Offset</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Mendiagnosis kebutuhan konversi warna ke CMYK untuk menghindari kesalahan cetak.</div>
+                    <div class="level-badge">L2 - Aplikasi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container print">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="q-number">20</div>
+                    <div class="topic">Resolusi</div>
+                    <div class="sub-topic">Cetak Outdoor</div>
+                </div>
+                <div class="card-back">
+                    <h4>Indikator Soal</h4>
+                    <div class="indicator-text">Menganalisis resolusi efisien (100-120 DPI) untuk Billboard berdasarkan jarak pandang.</div>
+                    <div class="level-badge">L3 - Penalaran</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bank Soal DKV - Arahkan Kursor ke Kartu untuk Membalik</p>
+    </footer>
+
+</body>
+</html>
+```
+```
